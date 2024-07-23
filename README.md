@@ -45,8 +45,8 @@ To run tests, run the following command
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/cse-faculty-portal.git
-cd cse-faculty-portal
+git clone https://github.com/SRMVDP-SYNC/18_regulation-CO-PO-Automation.git
+cd 18_regulation-CO-PO-Automation/18_regulation
 
 ```
 2. Set up a virtual environment:
