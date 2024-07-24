@@ -3,38 +3,42 @@
 
 The 18th Regulation CO PO Attainment Calculator Portal is a web-based application designed to streamline the administrative tasks of faculty members. This portal allows faculty to upload and manage PDF files, enter registration numbers, and generate CAM (Continuous Assessment Mark) tables for student evaluations. The user-friendly interface ensures efficient and organized handling of files and data, making it an essential tool for academic administration.
 
-Features
-Registration Number Input: Faculty can enter multiple registration numbers in a text area, facilitating the management of student data.
+# Features:
 
-PDF File Upload: Allows for the upload of multiple PDF files, with the file names displayed dynamically as they are added.
+#### Registration Number Input: 
+Faculty can enter multiple registration numbers in a text area, facilitating the management of student data.
 
-CAM Table Generation: Automatically generates a CAM table based on the uploaded data, providing a structured format for assessing student performance.
+#### PDF File Upload: 
+ Allows for the upload of multiple PDF files, with the file names displayed dynamically as they are added.
 
-Dynamic Interaction: Responsive buttons for generating CAM tables and calculating attainment, enhancing user interaction.
+#### CAM Table Generation: 
+Automatically generates a CAM table based on the uploaded data, providing a structured format for assessing student performance.
 
-Downloadable Results: Option to download the generated results for offline access and record-keeping.
+#### Dynamic Interaction:
+ Responsive buttons for generating CAM tables and calculating attainment, enhancing user interaction.
 
+#### Downloadable Results: 
+Option to download the generated results for offline access and record-keeping.
 
 ## Technologies Used
 Frontend: HTML, CSS, JavaScript
 
-Backend: Flask (Python)
+Backend: Flask
 
-Styling: Custom CSS for a polished and professional look
+## Usage
 
-Deployment: Web-based application
-## Usage/Examples
+#### Enter Registration Numbers: 
+In the provided text area, input one or more registration numbers separated by commas.
 
-Enter Registration Numbers:In the provided text area, input one or more registration numbers separated by commas.
+#### Upload PDF Files: 
 
-Upload PDF Files: 
  Use the file input to select and upload PDF files. Click the add button (+) to display the names of the uploaded files in a list.
 
-Generate CAM Table:
+#### Generate CAM Table:
  Click on the "Generate CAM" button to display the CAM table section.
 The CAM table will be populated with placeholders for CO (Course Outcome) attainment.
 
-Calculate Attainment:
+#### Calculate Attainment:
  After generating the CAM table, click the "Calculate Attainment" button to process the data.
 The "Download Results" button will then be displayed, allowing you to download the calculated results.
 
@@ -44,40 +48,54 @@ The "Download Results" button will then be displayed, allowing you to download t
 To run tests, run the following command
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/SRMVDP-SYNC/18_regulation-CO-PO-Automation.git
-cd 18_regulation-CO-PO-Automation/18_regulation
-
 ```
-2. Set up a virtual environment:
+
+2. Change to project directory:
+
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-
+cd 18_regulation-CO-PO-Automation
 ```
-3. Install dependencies:
+
+3. Setup the project:
+\
+\
+3.1 Create virtual environment
 ```bash
-pip install -r requirements.txt
-
+python -m venv venv 
 ```
-4. Run the project:
+3.2 Activate the virtual environment
+```bash
+venv\Scripts\activate
+```
+3.3 Install the dependencies 
+```bash
+pip install flask pdfplumber pandas openpyxl
+```
+3.4 Check the dependencies 
+```bash
+python -m flask --version
+```
+3.5 Create the flask app 
+```bash
+set FLASK_APP=FINALTEST  
+```
+4. Running the project:
 ```bash
 flask run
-
 ```
-5. Access the portal:
-Open a web browser and go to 'http://127.0.0.1:5000'
+5. Portal Visibility:
 
+The Project can be accessed [here](https://localhost:5000)
 
 ## Used By
 
 This project is used by:
 
-Faculty of Computer Science department, SRM Institute of Science and Technology, Vadapalani 
-
+Department of  Computer Science Engineering, SRM Institute of Science and Technology, Vadapalani.
 
 ## Demo
 
-This link contains the demonstration of our project:
-
-https://youtu.be/npNrojmUdwY
+The demonstration of the project can be accessed [here](https://youtu.be/npNrojmUdwY)
