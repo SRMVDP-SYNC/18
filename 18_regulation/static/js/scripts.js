@@ -197,7 +197,7 @@ async function calculateAttainment(event) {
         const cells = camTableBody.rows[i].cells;
 
         for (let j = 1; j < cells.length - 1; j++) {
-            let value = parseFloat(cells[j].querySelector('input').value) || 0;
+            let value = parseFloat(cells[j].querySelector('input')?.value) || 0;
             rowData.push(value);
         }
 
@@ -211,6 +211,107 @@ async function calculateAttainment(event) {
     let formdata = new FormData();
     formdata.append("regNumbers", JSON.stringify(regNumbersArray));
     formdata.append("fileOrder", JSON.stringify(filesArray.map(file => file.name)));
+    
+    // Safe retrieval of targetPercentage value
+    const targetPercentageInput = document.getElementById("targetPercentage");
+    let box_forlevel = document.getElementById("box_forlevel");
+    let targetPercentage = targetPercentageInput ? targetPercentageInput.value.trim() : 0;
+    let values=[];
+    
+    for( let row of box_forlevel.rows){
+        for(cell of row.cells){
+            if(cell.querySelector('input')){
+                console.log(cell.querySelector('input').value)
+                values.push(parseFloat(cell.querySelector('input').value));
+            }
+            else{
+                console.log(cell.textContent)
+
+
+            }
+        }
+    }
+    keys=[3,2,1,0];
+    function createDict(keys, values) {
+        let dict = {};
+        let valueIndex = 0;
+    
+        keys.forEach((key, index) => {
+            // Ensure we don't go out of bounds
+            if (valueIndex < values.length) {
+                if (index === keys.length - 1) {
+                    // Last key gets the remaining values as a pair
+                    dict[key] = `${values[valueIndex]}-${values[valueIndex + 1]}`;
+                } else {
+                    // For non-last keys, assign range
+                    dict[key] = `${values[valueIndex]}-${values[valueIndex + 1]}`;
+                    valueIndex += 2; // Move to the next pair
+                }
+            }
+        });
+    
+        return dict;
+    }
+    
+    let Dicttarget = createDict(keys, values);
+    console.log(Dicttarget);
+    console.log("COPOMapperTable");
+   
+// Get the table element by ID
+let COPOMapperTable = document.getElementById("COPOMapperTable");
+
+// Extract column headers
+let headers = [];
+for (let cell of COPOMapperTable.rows[0].cells) {
+    headers.push(cell.textContent.trim());
+}
+
+// Initialize an empty dictionary to store column values
+let dictionary = {};
+
+// Iterate over each column index (skipping the first column)
+for (let colIndex = 1; colIndex < headers.length; colIndex++) {
+    let colValues = [];
+
+    // Collect values for the current column from each row
+    for (let rowIndex = 1; rowIndex < COPOMapperTable.rows.length; rowIndex++) {
+        let cell = COPOMapperTable.rows[rowIndex].cells[colIndex];
+        let inputElement = cell.querySelector('input');
+
+        if (inputElement) {
+            let value = inputElement.value.trim(); // Trim to handle any accidental spaces
+            if (value === "") {
+                colValues.push(NaN); // Push NaN for empty values
+            } else {
+                colValues.push(parseFloat(value));
+            }
+        } else {
+            let cellText = cell.textContent.trim();
+            if (cellText === "") {
+                colValues.push(NaN); // Push NaN for empty text content
+            } else {
+                colValues.push(parseFloat(cellText));
+            }
+        }
+    }
+
+    // Assign the collected column values to the dictionary
+    dictionary[headers[colIndex]] = colValues;
+}
+
+// Log the dictionary
+console.log(dictionary);
+
+
+
+
+
+
+
+    formdata.append("Target_range", JSON.stringify(Dicttarget));
+    formdata.append("COPOMapperTablevalues", JSON.stringify(dictionary));
+    formdata.append("targetPercentage", JSON.stringify(targetPercentage));
+    console.log("Target Percentage:", JSON.stringify(targetPercentage));
 
     // Append files from filesArray to FormData
     for (let i = 0; i < filesArray.length; i++) {
